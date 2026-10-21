@@ -1,129 +1,75 @@
-# YASS — API Test Automation
+# 🧪 YASS — API Test Automation Framework
 
-## 1. Présentation du projet
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.13-blue?logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/pytest-Automation-0A9EDC?logo=pytest&logoColor=white" alt="pytest">
+  <img src="https://img.shields.io/badge/HTTP-Requests-green" alt="Requests">
+  <img src="https://img.shields.io/badge/Status-In%20Progress-orange" alt="In progress">
+</p>
 
-Ce projet a pour objectif de mettre en place une stratégie d'automatisation des tests API pour l'application web **YASS Parfums**.
+<p align="center">
+  **Framework d'automatisation QA pour les API de YASS Parfums**
+  
+  Tests fonctionnels · Validation JSON · Contrôle d'accès · Rapports HTML
+</p>
 
-- **Application testée :** https://yassparfums.com/
-- **Administration :** https://yassparfums.com/admin
-- **Environnement actuel :** application déployée, testée à distance
-- **IDE :** PyCharm
-- **Langage :** Python
-- **Framework de test :** pytest
-- **Client HTTP :** requests
+---
 
-Le projet QA est indépendant du backend. Les tests sont exécutés à partir de requêtes HTTP envoyées à l'application déployée. L'accès au code source backend n'est pas nécessaire.
+## 📌 1. Présentation
 
-## 2. Objectifs QA
+**YASS API Test Automation** est un framework de tests automatisés développé en Python pour vérifier la qualité et la fiabilité des API de la boutique YASS Parfums.
 
-Les objectifs sont les suivants :
+| Élément | Description |
+|---|---|
+| 🌐 Site web | [yassparfums.com](https://yassparfums.com/) |
+| 🔐 Administration | [yassparfums.com/admin](https://yassparfums.com/admin) |
+| 🐍 Langage | Python |
+| 🧪 Framework de test | pytest |
+| 🔌 Client HTTP | requests |
+| 💻 IDE | PyCharm |
+| 📊 Rapports | pytest-html |
+| 🎯 Périmètre actuel | Tests API sur environnement déployé |
 
-- Vérifier la disponibilité des endpoints API.
-- Contrôler les codes de réponse HTTP.
-- Vérifier la structure des réponses JSON.
-- Valider les données retournées par les API.
-- Tester les paramètres de recherche et de pagination.
-- Vérifier les réponses aux requêtes invalides.
-- Contrôler les mécanismes d'authentification et d'autorisation.
-- Identifier et documenter les anomalies.
-- Préparer une base réutilisable pour les futurs tests E2E Web et Mobile.
+Le framework est indépendant du backend : les tests communiquent directement avec les endpoints HTTP de l'application.
 
-## 3. Périmètre fonctionnel
+## 🎯 2. Objectifs QA
 
-### 3.1 Produits
+- ✅ Vérifier la disponibilité des endpoints.
+- ✅ Contrôler les statuts HTTP et les réponses JSON.
+- ✅ Valider les données et les types de champs.
+- ✅ Tester la pagination et les filtres.
+- ✅ Vérifier la gestion des identifiants inexistants.
+- ✅ Contrôler l'accès aux endpoints administratifs.
+- 📊 Générer des rapports d'exécution HTML.
+- 🚀 Préparer l'automatisation E2E Web et Mobile.
 
-Endpoint principal : `/api/products`
-
-Tests prévus et commencés :
-
-- Récupération de la liste des produits.
-- Vérification de la structure JSON.
-- Vérification des champs principaux.
-- Contrôle de la pagination.
-- Consultation d'un produit par son identifiant.
-- Gestion d'un identifiant inexistant.
-- Filtrage par recherche.
-- Filtrage par catégorie.
-- Filtrage par prix.
-- Validation des paramètres invalides.
-
-### 3.2 Catégories
-
-Endpoint principal : `/api/categories`
-
-Tests prévus et commencés :
-
-- Récupération de la liste des catégories.
-- Vérification de la structure de la réponse.
-- Consultation d'une catégorie existante.
-- Gestion d'une catégorie inexistante.
-
-### 3.3 Paramètres de la boutique
-
-Endpoint : `/api/settings`
-
-Tests prévus et commencés :
-
-- Vérification du code HTTP.
-- Vérification du format JSON.
-- Vérification de la présence de l'objet `data`.
-
-### 3.4 Santé de l'API
-
-Endpoint : `/api/health`
-
-Tests prévus et commencés :
-
-- Vérification de la disponibilité de l'API.
-- Vérification du statut HTTP.
-- Vérification de la réponse JSON.
-
-### 3.5 Administration et sécurité
-
-Endpoints :
-
-- `/api/dashboard`
-- `/api/auth/me`
-- `/api/admin/orders`
-
-Tests prévus et commencés :
-
-- Vérification du refus d'accès sans token.
-- Vérification des réponses HTTP 401 ou 403.
-- Préparation des tests authentifiés avec un compte de test autorisé.
-
-### 3.6 Documentation API
-
-Les endpoints suivants ont été identifiés dans la cartographie initiale et restent à vérifier en exécution si nécessaire :
-
-- `/api/docs`
-- `/api/docs/`
-- `/api/docs/openapi.json`
-
-## 4. Architecture du projet
-
-Structure actuelle recommandée :
+## 🏗️ 3. Architecture du projet
 
 ```text
 E2ETestYaas/
-│
 ├── api/
-│   ├── __init__.py
-│   ├── config.py
+│   ├── discovery/
+│   ├── tests/
+│   │   ├── test_admin_access.py
+│   │   ├── test_api_exploration.py
+│   │   ├── test_auth.py
+│   │   ├── test_categories.py
+│   │   ├── test_categories_detail.py
+│   │   ├── test_health.py
+│   │   ├── test_orders.py
+│   │   ├── test_product_detail.py
+│   │   ├── test_product_filters.py
+│   │   ├── test_products.py
+│   │   └── test_settings.py
 │   ├── client.py
-│   ├── endpoints.py
-│   │
-│   └── tests/
-│       ├── test_health.py
-│       ├── test_products.py
-│       ├── test_product_detail.py
-│       ├── test_product_filters.py
-│       ├── test_categories.py
-│       ├── test_category_detail.py
-│       ├── test_settings.py
-│       ├── test_admin_access.py
-│       └── test_api_exploration.py
-│
+│   ├── config.py
+│   └── endpoints.py
+├── config/
+│   └── environments.py
+├── data/
+├── mobile/
+├── reports/
+├── web/
 ├── conftest.py
 ├── pytest.ini
 ├── requirements.txt
@@ -131,33 +77,46 @@ E2ETestYaas/
 └── README.md
 ```
 
-### Rôle des principaux fichiers
+### 🔧 Rôle des composants
 
-| Fichier | Responsabilité |
+| Composant | Responsabilité |
 |---|---|
-| `api/config.py` | Configuration de l'URL de base et du timeout |
-| `api/client.py` | Client HTTP commun basé sur `requests.Session` |
+| `api/client.py` | Client HTTP commun |
+| `api/config.py` | URL de base et timeout |
 | `api/endpoints.py` | Centralisation des chemins API |
-| `conftest.py` | Fixture pytest `api_client` |
+| `api/discovery/` | Documentation et découverte des endpoints |
 | `api/tests/` | Scénarios automatisés |
-| `pytest.ini` | Configuration de pytest |
-| `requirements.txt` | Dépendances Python |
+| `config/` | Configuration des environnements |
+| `data/` | Données de test |
+| `reports/` | Rapports d'exécution |
+| `web/` | Futurs tests E2E Web |
+| `mobile/` | Futurs tests E2E Mobile |
+| `conftest.py` | Fixtures pytest partagées |
 
-## 5. Configuration
+## ⚙️ 4. Installation et configuration
 
-### 5.1 Dépendances
+### Prérequis
 
-Installation des dépendances :
+- Python installé.
+- PyCharm.
+- Accès réseau à l'application YASS.
+- Git pour la gestion du code source.
+
+### Installer les dépendances
 
 ```bash
-python -m pip install pytest requests
+python -m pip install -r requirements.txt
 ```
 
-Les dépendances du projet sont déclarées dans `requirements.txt`.
+Si nécessaire, installer le générateur de rapports :
 
-### 5.2 URL de base
+```bash
+python -m pip install pytest-html
+```
 
-La configuration est centralisée dans `api/config.py`.
+### Configurer l'environnement
+
+L'URL de base est centralisée dans `api/config.py`.
 
 ```python
 import os
@@ -170,122 +129,55 @@ BASE_URL = os.getenv(
 TIMEOUT = 20
 ```
 
-L'URL par défaut cible l'application déployée.
+La variable `YASS_API_BASE_URL` permet de changer d'environnement sans modifier les tests.
 
-Pour changer d'environnement, la variable `YASS_API_BASE_URL` peut être configurée sans modifier les tests.
+> 🔒 **Sécurité :** ne jamais publier de mots de passe, de tokens, de clés API ou le fichier `.env`.
 
-### 5.3 Client HTTP
+## 🧪 5. Stratégie de test API
 
-Le client commun est défini dans `api/client.py`.
+### Niveau 1 — Disponibilité
 
-Il centralise :
+Vérifier que les endpoints répondent et retournent les statuts attendus.
 
-- La construction des URLs.
-- La session HTTP.
-- Le timeout des requêtes.
-- La préparation à l'ajout de headers et de l'authentification.
+### Niveau 2 — Tests fonctionnels
 
-Tous les tests doivent utiliser `api_client.get()` pour les requêtes GET, plutôt que d'appeler directement `requests.get()`.
-
-### 5.4 Centralisation des endpoints
-
-Les chemins API sont définis dans `api/endpoints.py`.
-
-Exemple :
-
-```python
-PRODUCTS = "/api/products"
-PRODUCT_DETAIL = "/api/products/{id}"
-CATEGORIES = "/api/categories"
-SETTINGS = "/api/settings"
-```
-
-Les chemins sont importés dans les tests afin d'éviter leur duplication.
-
-## 6. Stratégie de test API
-
-La stratégie est organisée en plusieurs niveaux.
-
-### Niveau 1 — Tests de disponibilité
-
-Objectif : vérifier que les endpoints sont accessibles.
-
-Contrôles :
-
-- Statut HTTP.
-- Temps de réponse observé.
-- Présence d'une réponse exploitable.
-
-### Niveau 2 — Tests fonctionnels nominaux
-
-Objectif : vérifier que les API retournent les données attendues.
-
-Contrôles :
-
-- Structure JSON.
-- Présence des champs obligatoires.
-- Types de données.
-- Cohérence des identifiants.
-- Format des listes et objets.
+Valider la structure JSON, les champs obligatoires, les types de données et la cohérence des identifiants.
 
 ### Niveau 3 — Tests négatifs
 
-Objectif : vérifier le comportement face aux entrées invalides.
+Tester les identifiants inexistants, les paramètres invalides et les erreurs de validation.
 
-Contrôles :
+### Niveau 4 — Règles métier
 
-- Identifiant inexistant.
-- Pagination invalide.
-- Paramètres incorrects.
-- Ressource absente.
-- Accès sans authentification.
-
-### Niveau 4 — Tests métier
-
-Objectif : vérifier la cohérence des données.
-
-Exemples :
-
-- Prix non négatif.
-- Identifiant de produit cohérent.
-- Pagination respectée.
-- Filtres appliqués correctement.
-- Données de détail cohérentes avec celles de la liste.
+Vérifier la pagination, la recherche, les filtres et la cohérence des données retournées.
 
 ### Niveau 5 — Sécurité
 
-Objectif : contrôler les autorisations.
+Vérifier les accès sans token, puis compléter les tests avec des comptes de test autorisés.
 
-Exemples :
+## 📚 6. Couverture API
 
-- Accès au dashboard sans token.
-- Accès au profil admin sans token.
-- Accès aux commandes sans token.
-- Vérification future des rôles et des tokens invalides ou expirés.
-
-Les tests de sécurité plus approfondis seront réalisés avec un compte de test autorisé et dans un environnement adapté.
-
-## 7. Priorisation des tests
-
-| Priorité | Description | Exemples |
+| Domaine | Endpoint principal | Couverture actuelle |
 |---|---|---|
-| P0 | Fonctionnalités essentielles et disponibilité | Santé API, produits, catégories |
-| P1 | Validation, filtres et contrôle d'accès | Pagination, recherche, authentification |
-| P2 | Cas limites et couverture complémentaire | Paramètres avancés, erreurs supplémentaires |
+| ❤️ Santé | `/api/health` | Tests de disponibilité |
+| 🛍️ Produits | `/api/products` | Liste, détail, pagination et filtres |
+| 🗂️ Catégories | `/api/categories` | Liste et détail |
+| ⚙️ Paramètres | `/api/settings` | Récupération des paramètres |
+| 🔐 Dashboard | `/api/dashboard` | Contrôle d'accès sans token |
+| 👤 Authentification | `/api/auth/me` | Contrôle d'accès sans token |
+| 📦 Commandes | `/api/admin/orders` | Contrôle d'accès sans token |
 
-Les priorités pourront être ajustées selon les risques métier et les résultats observés.
+*La couverture indiquée correspond aux scénarios présents dans le projet. Les endpoints et leurs contrats doivent être confirmés à partir des réponses réelles.*
 
-## 8. Exécution des tests
+## ▶️ 7. Exécuter les tests
 
 ### Lancer toute la suite
-
-Depuis le terminal PyCharm :
 
 ```bash
 python -m pytest -v
 ```
 
-### Exécuter un fichier spécifique
+### Lancer un fichier spécifique
 
 ```bash
 python -m pytest -v api/tests/test_products.py
@@ -297,128 +189,97 @@ python -m pytest -v api/tests/test_products.py
 python -m pytest -v -s api/tests/test_api_exploration.py
 ```
 
-### Exécuter plusieurs fichiers
+### Générer le rapport HTML
 
 ```bash
-python -m pytest -v api/tests/test_products.py api/tests/test_product_detail.py
+python -m pytest -v --html=reports/api-test-report.html --self-contained-html
 ```
 
-### Comprendre les résultats
+Le rapport est enregistré dans :
 
-- `PASSED` : le test a satisfait ses assertions.
-- `FAILED` : une assertion ou une opération du test a échoué.
-- `SKIPPED` : le test a été volontairement ignoré.
-- `ERROR` : le test n'a pas pu être exécuté correctement, par exemple à cause d'une erreur de fixture.
+```text
+reports/api-test-report.html
+```
 
-Un test réussi confirme uniquement le comportement vérifié par ses assertions. Il ne garantit pas à lui seul l'absence de défaut dans toute l'API.
+Ouvrir ce fichier dans Chrome pour consulter les résultats, les erreurs et les traces d'échec.
 
-## 9. État actuel de la suite
+## 📊 8. Dernier bilan d'exécution connu
 
-À la dernière exécution complète :
+<p align="center">
+  <img src="https://img.shields.io/badge/Tests-17-blue" alt="17 tests">
+  <img src="https://img.shields.io/badge/Passed-16-success" alt="16 réussis">
+  <img src="https://img.shields.io/badge/Failed-1-critical" alt="1 échoué">
+</p>
 
 | Indicateur | Résultat |
 |---|---:|
-| Tests collectés | 17 |
+| Tests exécutés | 17 |
 | Tests réussis | 16 |
 | Tests échoués | 1 |
 
-### Anomalie connue
+### 🐞 Anomalie connue
 
 **Filtrage des produits par catégorie**
 
 - Endpoint : `GET /api/products`
-- Paramètre : `categorie=7`
-- Résultat observé : HTTP 500
-- Résultat attendu par le test actuel : HTTP 200
+- Paramètre testé : `categorie=7`
+- Statut observé : `500 Internal Server Error`
+- Statut attendu par le test : `200 OK`
 
-Cette anomalie est connue et reste à investiguer.
+Cette anomalie reste à investiguer. Le test conserve le comportement attendu afin de détecter une éventuelle régression ou correction.
 
-Elle ne doit pas être masquée en remplaçant arbitrairement le statut attendu par 500. Le test doit continuer à représenter le comportement fonctionnel souhaité, jusqu'à ce que l'analyse confirme la cause et le résultat attendu.
+> ℹ️ Ces chiffres correspondent à la dernière campagne communiquée. Ils ne sont pas actualisés automatiquement par GitHub.
 
-Une fois le problème corrigé ou expliqué, le test devra être réexécuté et le rapport mis à jour.
+## 🚦 9. Priorités QA
 
-## 10. Règles de développement des tests
+| Priorité | Objectif |
+|---|---|
+| 🔴 P0 | Stabiliser les endpoints essentiels et les tests de régression |
+| 🟠 P1 | Compléter les filtres, la pagination et les tests négatifs |
+| 🟡 P1 | Étendre les tests d'authentification et d'autorisation |
+| 🔵 P2 | Ajouter des rapports enrichis et des contrôles de schéma |
+| ⚪ P2 | Préparer l'intégration CI/CD |
 
-Les règles suivantes s'appliquent au projet :
+## 🗺️ 10. Roadmap
 
-1. Un fichier de test par domaine fonctionnel ou groupe de scénarios cohérents.
-2. Utiliser `api_client` pour toutes les requêtes HTTP.
-3. Centraliser les chemins dans `api/endpoints.py`.
-4. Ne pas dupliquer l'URL de base dans les tests.
-5. Garder des noms de fonctions explicites commençant par `test_`.
-6. Écrire des assertions simples et lisibles.
-7. Séparer les scénarios nominaux et négatifs lorsque cela améliore la lisibilité.
-8. Ne pas ignorer une anomalie sans la documenter.
-9. Ne pas exposer de mots de passe, tokens ou autres secrets dans les logs ou le dépôt.
-10. Ne pas effectuer de modifications ou suppressions de données en production.
-
-## 11. Limites actuelles
-
-- Les tests ciblent l'application déployée.
-- Le code source backend n'est pas accessible au projet QA.
-- Les résultats dépendent de la disponibilité du site et de son environnement.
-- Certains comportements restent à explorer.
-- Les tests administratifs authentifiés ne sont pas encore couverts.
-- Les tests d'écriture ne sont pas inclus dans le périmètre actuel.
-- Les tests E2E Web et Mobile ne sont pas encore développés.
-
-Les erreurs réseau, les changements de données et les modifications du contrat API peuvent affecter les résultats des tests.
-
-## 12. Roadmap
-
-### Phase 1 — Discovery API
-
-- [x] Identifier les endpoints principaux.
-- [x] Tester la liste des produits.
-- [x] Tester le détail produit.
-- [x] Tester la liste des catégories.
-- [x] Tester le détail catégorie.
-- [x] Tester les paramètres de la boutique.
-- [x] Tester certains accès administratifs sans token.
-- [x] Centraliser la configuration HTTP.
-- [ ] Documenter tous les endpoints confirmés en exécution.
-- [ ] Investiguer le filtre de catégorie qui retourne HTTP 500.
-
-### Phase 2 — Compléter les tests API
-
-- [ ] Finaliser les tests des paramètres de pagination.
-- [ ] Vérifier le comportement des filtres.
-- [ ] Compléter les tests négatifs.
-- [ ] Ajouter les tests authentifiés avec un compte autorisé.
-- [ ] Documenter les anomalies et résultats attendus.
-- [ ] Produire un bilan d'exécution reproductible.
-
-### Phase 3 — Amélioration du framework
-
+- [x] Créer le framework pytest + requests.
+- [x] Centraliser la configuration et les endpoints.
+- [x] Développer les premiers tests produits et catégories.
+- [x] Ajouter les contrôles d'accès sans token.
+- [x] Générer un rapport HTML.
+- [ ] Investiguer le filtre de catégorie en erreur.
+- [ ] Compléter les tests API authentifiés.
 - [ ] Ajouter des données de test réutilisables.
-- [ ] Améliorer la configuration des environnements.
-- [ ] Ajouter un rapport de test HTML ou Allure.
-- [ ] Réduire les doublons entre scénarios.
-- [ ] Ajouter des contrôles de schéma JSON lorsque les contrats sont confirmés.
+- [ ] Mettre en place une intégration CI/CD.
+- [ ] Développer les tests E2E Web avec Selenium.
+- [ ] Développer les tests Mobile avec Appium pour Android et iOS.
 
-### Phase 4 — Tests E2E Web
+## 📏 11. Bonnes pratiques
 
-- [ ] Installer Selenium.
-- [ ] Mettre en place le Page Object Model.
-- [ ] Automatiser les parcours client prioritaires.
-- [ ] Tester le parcours administratif.
+1. Utiliser `api_client` pour les appels HTTP.
+2. Centraliser les chemins dans `api/endpoints.py`.
+3. Garder les scénarios simples et indépendants.
+4. Ne pas masquer les anomalies en modifiant arbitrairement les assertions.
+5. Documenter les résultats et les défauts constatés.
+6. Ne pas exposer de secrets dans le dépôt.
+7. Limiter les requêtes sur la production.
+8. Réserver les opérations d'écriture aux environnements et comptes de test autorisés.
 
-### Phase 5 — Tests Mobile
+## 👨‍💻 12. Contribution et maintenance
 
-- [ ] Préparer Appium et Python.
-- [ ] Tester le site mobile sous Chrome Android.
-- [ ] Tester le site mobile sous Safari iOS.
-- [ ] Ajouter les configurations tablette et appareils réels selon les besoins.
+Avant de committer des modifications :
 
-### Phase 6 — CI/CD
+```bash
+python -m pytest -v
+git status
+```
 
-- [ ] Intégrer les tests dans un pipeline CI.
-- [ ] Exécuter automatiquement les tests de régression.
-- [ ] Publier les rapports.
-- [ ] Définir les règles de validation avant livraison.
+Vérifier les résultats, les fichiers modifiés et l'absence de secrets avant le commit et le push.
 
-## 13. Conclusion
+---
 
-Le projet YASS API Test Automation constitue la base de la stratégie d'automatisation QA.
-
-L'approche actuelle privilégie des tests simples, lisibles et indépendants du backend. Le framework sera enrichi progressivement, en commençant par la fiabilisation des tests API avant d'étendre la couverture aux parcours E2E Web et Mobile.
+<p align="center">
+  **YASS API Test Automation**
+  
+  *Construire une couverture QA fiable, progressive et maintenable.*
+</p>
