@@ -1,9 +1,8 @@
 
 import os
 
-BASE_URL = os.getenv(
-    "YASS_API_BASE_URL",
-    "https://yassparfums.com"
-)
+from Configs.environments import BASE_URL
 
-TIMEOUT = 20
+# configuration API
+
+TIMEOUT = int(os.getenv("YASS_API_TIMEOUT", "20"))

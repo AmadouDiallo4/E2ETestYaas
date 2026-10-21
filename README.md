@@ -1,52 +1,57 @@
-# 🧪 YASS — API Test Automation Framework
+# 🧪 E2ETestYaas
+### QA Automation Framework — YASS Parfums
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.13-blue?logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/pytest-Automation-0A9EDC?logo=pytest&logoColor=white" alt="pytest">
-  <img src="https://img.shields.io/badge/HTTP-Requests-green" alt="Requests">
-  <img src="https://img.shields.io/badge/Status-In%20Progress-orange" alt="In progress">
-</p>
+![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-Testing-0A9EDC?logo=pytest&logoColor=white)
+![Selenium](https://img.shields.io/badge/Selenium-Web_Automation-43B02A?logo=selenium&logoColor=white)
+![Requests](https://img.shields.io/badge/Requests-API_Testing-orange)
+![Status](https://img.shields.io/badge/Status-In_Progress-yellow)
 
-<p align="center">
-  **Framework d'automatisation QA pour les API de YASS Parfums**
-  
-  Tests fonctionnels · Validation JSON · Contrôle d'accès · Rapports HTML
-</p>
+> **Un framework de tests automatisés pour contrôler la qualité des API et de l'interface web de YASS Parfums.**
+
+🌐 **Application :** [yassparfums.com](https://yassparfums.com/)  
+🔐 **Administration :** [yassparfums.com/admin](https://yassparfums.com/admin)  
+🛠️ **IDE :** PyCharm
 
 ---
 
-## 📌 1. Présentation
+## 📌 01 — Présentation du projet
 
-**YASS API Test Automation** est un framework de tests automatisés développé en Python pour vérifier la qualité et la fiabilité des API de la boutique YASS Parfums.
+**E2ETestYaas** est un framework QA développé en Python pour automatiser les tests de l'application YASS Parfums.
 
-| Élément | Description |
-|---|---|
-| 🌐 Site web | [yassparfums.com](https://yassparfums.com/) |
-| 🔐 Administration | [yassparfums.com/admin](https://yassparfums.com/admin) |
-| 🐍 Langage | Python |
-| 🧪 Framework de test | pytest |
-| 🔌 Client HTTP | requests |
-| 💻 IDE | PyCharm |
-| 📊 Rapports | pytest-html |
-| 🎯 Périmètre actuel | Tests API sur environnement déployé |
+Le projet suit une approche progressive : commencer par les tests API, mettre en place les tests web avec Selenium, puis étendre la couverture aux parcours end-to-end et aux applications mobiles.
 
-Le framework est indépendant du backend : les tests communiquent directement avec les endpoints HTTP de l'application.
+### 🎯 Objectifs
 
-## 🎯 2. Objectifs QA
+- ✅ Vérifier les réponses et la structure des API.
+- ✅ Tester les produits, catégories et filtres.
+- ✅ Contrôler les accès aux endpoints protégés.
+- ✅ Vérifier le chargement des pages et la navigation web.
+- 🔄 Automatiser les fiches produits et les parcours d'achat.
+- 📊 Produire des rapports de test HTML.
+- 📱 Préparer les tests mobiles avec Appium.
 
-- ✅ Vérifier la disponibilité des endpoints.
-- ✅ Contrôler les statuts HTTP et les réponses JSON.
-- ✅ Valider les données et les types de champs.
-- ✅ Tester la pagination et les filtres.
-- ✅ Vérifier la gestion des identifiants inexistants.
-- ✅ Contrôler l'accès aux endpoints administratifs.
-- 📊 Générer des rapports d'exécution HTML.
-- 🚀 Préparer l'automatisation E2E Web et Mobile.
+---
 
-## 🏗️ 3. Architecture du projet
+## 🧰 02 — Stack technique
+
+| Technologie | Rôle |
+|:--|:--|
+| 🐍 Python | Langage du framework |
+| 🧪 Pytest | Exécution des tests |
+| 🌐 Requests | Tests API HTTP |
+| 🖥️ Selenium WebDriver | Automatisation web |
+| 🌍 Chrome | Navigateur de test |
+| 📊 pytest-html | Rapports HTML |
+| 💻 PyCharm | Environnement de développement |
+
+---
+
+## 🏗️ 03 — Architecture du projet
 
 ```text
 E2ETestYaas/
+│
 ├── api/
 │   ├── discovery/
 │   ├── tests/
@@ -64,222 +69,249 @@ E2ETestYaas/
 │   ├── client.py
 │   ├── config.py
 │   └── endpoints.py
+│
 ├── config/
 │   └── environments.py
-├── data/
-├── mobile/
-├── reports/
+│
 ├── web/
+│   ├── pages/
+│   │   ├── base_page.py
+│   │   ├── home_page.py
+│   │   └── catalogue_page.py
+│   └── tests/
+│       ├── test_home.py
+│       ├── test_navigation.py
+│       └── test_catalogue.py
+│
+├── mobile/
+├── data/
+├── reports/
 ├── conftest.py
 ├── pytest.ini
 ├── requirements.txt
-├── .gitignore
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
-### 🔧 Rôle des composants
+> **Architecture retenue :** séparation des tests API, des pages web, des scénarios de test et de la configuration commune.
 
-| Composant | Responsabilité |
-|---|---|
-| `api/client.py` | Client HTTP commun |
-| `api/config.py` | URL de base et timeout |
-| `api/endpoints.py` | Centralisation des chemins API |
-| `api/discovery/` | Documentation et découverte des endpoints |
-| `api/tests/` | Scénarios automatisés |
-| `config/` | Configuration des environnements |
-| `data/` | Données de test |
-| `reports/` | Rapports d'exécution |
-| `web/` | Futurs tests E2E Web |
-| `mobile/` | Futurs tests E2E Mobile |
-| `conftest.py` | Fixtures pytest partagées |
+---
 
-## ⚙️ 4. Installation et configuration
+## 🔌 04 — Stratégie de tests API
 
-### Prérequis
+### Objectif
 
-- Python installé.
-- PyCharm.
-- Accès réseau à l'application YASS.
-- Git pour la gestion du code source.
+Valider les réponses HTTP, les données retournées, les paramètres de requête et les contrôles d'accès, sans accès direct au backend.
 
-### Installer les dépendances
+### Couverture fonctionnelle
+
+| Domaine | Contrôles |
+|:--|:--|
+| Health check | Disponibilité de l'API |
+| Produits | Liste, données et pagination |
+| Détail produit | Produit existant et identifiant inexistant |
+| Catégories | Liste et détail |
+| Filtres | Recherche, prix et catégorie |
+| Paramètres | Structure de la réponse |
+| Administration | Accès sans authentification |
+| Exploration | Paramètres invalides et réponses d'erreur |
+
+### Bonnes pratiques
+
+- Centraliser les requêtes dans `api/client.py`.
+- Centraliser les chemins dans `api/endpoints.py`.
+- Garder la configuration dans `api/config.py`.
+- Tester les cas nominaux et les cas négatifs.
+- Utiliser des assertions explicites.
+- Documenter les anomalies sans affaiblir les assertions pour faire artificiellement passer les tests.
+
+---
+
+## 🖥️ 05 — Stratégie de tests Web Selenium
+
+### Objectif
+
+Vérifier le comportement visible de l'application dans Chrome et automatiser progressivement les interactions essentielles des utilisateurs.
+
+### 🧱 Design Pattern : Page Object Model (POM)
+
+Le framework utilise le **Page Object Model** pour séparer la logique des pages des scénarios de test.
+
+| Fichier | Responsabilité |
+|:--|:--|
+| `config/environments.py` | URL, délai d'attente et dimensions du navigateur |
+| `conftest.py` | Création et fermeture du navigateur |
+| `web/pages/base_page.py` | Méthodes Selenium communes |
+| `web/pages/home_page.py` | Actions de la page d'accueil |
+| `web/pages/catalogue_page.py` | Navigation et accès au catalogue |
+| `web/tests/` | Scénarios et assertions |
+
+**Avantages :** moins de duplication, sélecteurs centralisés, tests plus lisibles et maintenance facilitée.
+
+### ✅ Scénarios web actuellement validés
+
+| ID | Scénario | Résultat communiqué |
+|:--|:--|:--:|
+| WEB-001 | Chargement de la page d'accueil | ✅ PASS |
+| WEB-002 | Navigation avec « Découvrir la boutique » | ✅ PASS |
+| WEB-003 | Affichage de la section « Nos produits » | ✅ PASS |
+| WEB-004 | Présence d'éléments dans la grille produits | ✅ PASS |
+
+*Les cartes produits, les prix et les fiches produits doivent encore faire l'objet de vérifications détaillées.*
+
+### 🚀 Prochains scénarios
+
+1. Vérifier le nom et le prix de chaque produit affiché.
+2. Ouvrir une fiche produit et vérifier ses informations.
+3. Tester les filtres et la recherche depuis l'interface.
+4. Vérifier les restrictions d'accès à l'administration.
+5. Construire des parcours end-to-end complets.
+
+---
+
+## ⚙️ 06 — Configuration centralisée
+
+Le fichier `config/environments.py` centralise les paramètres communs :
+
+- `BASE_URL` — adresse de l'application.
+- `DEFAULT_TIMEOUT` — délai d'attente Selenium.
+- `BROWSER_WINDOW_SIZE` — dimensions initiales de Chrome.
+
+L'adresse peut être remplacée par la variable d'environnement `YASS_BASE_URL`.
+
+La configuration API reste dans `api/config.py`, qui réutilise l'URL commune tout en conservant son délai d'attente spécifique.
+
+🔒 **Sécurité :** ne jamais publier les mots de passe, jetons ou valeurs confidentielles du fichier `.env`.
+
+---
+
+## 📦 07 — Installation
+
+### Étape 1 — Créer l'environnement virtuel
+
+Sous Windows :
+
+```bash
+python -m venv .venv
+```
+
+### Étape 2 — Activer l'environnement
+
+```bash
+.venv\Scripts\activate
+```
+
+### Étape 3 — Installer les dépendances
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-Si nécessaire, installer le générateur de rapports :
+### Étape 4 — Vérifier l'environnement
 
-```bash
-python -m pip install pytest-html
-```
+Vérifiez que Chrome est installé. Avec une version récente de Selenium, Selenium Manager peut gérer automatiquement le pilote du navigateur.
 
-### Configurer l'environnement
+---
 
-L'URL de base est centralisée dans `api/config.py`.
+## ▶️ 08 — Exécution des tests
 
-```python
-import os
-
-BASE_URL = os.getenv(
-    "YASS_API_BASE_URL",
-    "https://yassparfums.com"
-)
-
-TIMEOUT = 20
-```
-
-La variable `YASS_API_BASE_URL` permet de changer d'environnement sans modifier les tests.
-
-> 🔒 **Sécurité :** ne jamais publier de mots de passe, de tokens, de clés API ou le fichier `.env`.
-
-## 🧪 5. Stratégie de test API
-
-### Niveau 1 — Disponibilité
-
-Vérifier que les endpoints répondent et retournent les statuts attendus.
-
-### Niveau 2 — Tests fonctionnels
-
-Valider la structure JSON, les champs obligatoires, les types de données et la cohérence des identifiants.
-
-### Niveau 3 — Tests négatifs
-
-Tester les identifiants inexistants, les paramètres invalides et les erreurs de validation.
-
-### Niveau 4 — Règles métier
-
-Vérifier la pagination, la recherche, les filtres et la cohérence des données retournées.
-
-### Niveau 5 — Sécurité
-
-Vérifier les accès sans token, puis compléter les tests avec des comptes de test autorisés.
-
-## 📚 6. Couverture API
-
-| Domaine | Endpoint principal | Couverture actuelle |
-|---|---|---|
-| ❤️ Santé | `/api/health` | Tests de disponibilité |
-| 🛍️ Produits | `/api/products` | Liste, détail, pagination et filtres |
-| 🗂️ Catégories | `/api/categories` | Liste et détail |
-| ⚙️ Paramètres | `/api/settings` | Récupération des paramètres |
-| 🔐 Dashboard | `/api/dashboard` | Contrôle d'accès sans token |
-| 👤 Authentification | `/api/auth/me` | Contrôle d'accès sans token |
-| 📦 Commandes | `/api/admin/orders` | Contrôle d'accès sans token |
-
-*La couverture indiquée correspond aux scénarios présents dans le projet. Les endpoints et leurs contrats doivent être confirmés à partir des réponses réelles.*
-
-## ▶️ 7. Exécuter les tests
-
-### Lancer toute la suite
+### Tous les tests
 
 ```bash
 python -m pytest -v
 ```
 
-### Lancer un fichier spécifique
+### Tests API uniquement
 
 ```bash
-python -m pytest -v api/tests/test_products.py
+python -m pytest -v api/tests
 ```
 
-### Afficher les réponses de diagnostic
+### Tests Web uniquement
 
 ```bash
-python -m pytest -v -s api/tests/test_api_exploration.py
+python -m pytest -v web/tests
 ```
 
-### Générer le rapport HTML
+### Test de la page d'accueil
+
+```bash
+python -m pytest -v web/tests/test_home.py
+```
+
+### Générer un rapport HTML
 
 ```bash
 python -m pytest -v --html=reports/api-test-report.html --self-contained-html
 ```
 
-Le rapport est enregistré dans :
-
-```text
-reports/api-test-report.html
-```
-
-Ouvrir ce fichier dans Chrome pour consulter les résultats, les erreurs et les traces d'échec.
-
-## 📊 8. Dernier bilan d'exécution connu
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Tests-17-blue" alt="17 tests">
-  <img src="https://img.shields.io/badge/Passed-16-success" alt="16 réussis">
-  <img src="https://img.shields.io/badge/Failed-1-critical" alt="1 échoué">
-</p>
-
-| Indicateur | Résultat |
-|---|---:|
-| Tests exécutés | 17 |
-| Tests réussis | 16 |
-| Tests échoués | 1 |
-
-### 🐞 Anomalie connue
-
-**Filtrage des produits par catégorie**
-
-- Endpoint : `GET /api/products`
-- Paramètre testé : `categorie=7`
-- Statut observé : `500 Internal Server Error`
-- Statut attendu par le test : `200 OK`
-
-Cette anomalie reste à investiguer. Le test conserve le comportement attendu afin de détecter une éventuelle régression ou correction.
-
-> ℹ️ Ces chiffres correspondent à la dernière campagne communiquée. Ils ne sont pas actualisés automatiquement par GitHub.
-
-## 🚦 9. Priorités QA
-
-| Priorité | Objectif |
-|---|---|
-| 🔴 P0 | Stabiliser les endpoints essentiels et les tests de régression |
-| 🟠 P1 | Compléter les filtres, la pagination et les tests négatifs |
-| 🟡 P1 | Étendre les tests d'authentification et d'autorisation |
-| 🔵 P2 | Ajouter des rapports enrichis et des contrôles de schéma |
-| ⚪ P2 | Préparer l'intégration CI/CD |
-
-## 🗺️ 10. Roadmap
-
-- [x] Créer le framework pytest + requests.
-- [x] Centraliser la configuration et les endpoints.
-- [x] Développer les premiers tests produits et catégories.
-- [x] Ajouter les contrôles d'accès sans token.
-- [x] Générer un rapport HTML.
-- [ ] Investiguer le filtre de catégorie en erreur.
-- [ ] Compléter les tests API authentifiés.
-- [ ] Ajouter des données de test réutilisables.
-- [ ] Mettre en place une intégration CI/CD.
-- [ ] Développer les tests E2E Web avec Selenium.
-- [ ] Développer les tests Mobile avec Appium pour Android et iOS.
-
-## 📏 11. Bonnes pratiques
-
-1. Utiliser `api_client` pour les appels HTTP.
-2. Centraliser les chemins dans `api/endpoints.py`.
-3. Garder les scénarios simples et indépendants.
-4. Ne pas masquer les anomalies en modifiant arbitrairement les assertions.
-5. Documenter les résultats et les défauts constatés.
-6. Ne pas exposer de secrets dans le dépôt.
-7. Limiter les requêtes sur la production.
-8. Réserver les opérations d'écriture aux environnements et comptes de test autorisés.
-
-## 👨‍💻 12. Contribution et maintenance
-
-Avant de committer des modifications :
-
-```bash
-python -m pytest -v
-git status
-```
-
-Vérifier les résultats, les fichiers modifiés et l'absence de secrets avant le commit et le push.
+📁 Le rapport est enregistré dans `reports/`. Le nom `api-test-report.html` est historique ; un nom plus général pourra être utilisé lorsque les campagnes API et web seront consolidées.
 
 ---
 
-<p align="center">
-  **YASS API Test Automation**
-  
-  *Construire une couverture QA fiable, progressive et maintenable.*
-</p>
+## 🐛 09 — Anomalie API connue
+
+<details>
+<summary><strong>API — Filtrage des produits par catégorie (HTTP 500)</strong></summary>
+
+**Test concerné :** `test_filter_products_by_category`
+
+**Requête :** `GET /api/products?categorie=7`
+
+| Élément | Résultat |
+|:--|:--|
+| Résultat attendu | HTTP 200 |
+| Résultat observé | HTTP 500 |
+| Statut | 🔎 À investiguer |
+
+Lors de la dernière campagne API communiquée :
+
+- **16 tests réussis**
+- **1 test échoué**
+
+L'anomalie reste documentée. L'assertion ne doit pas être modifiée uniquement pour obtenir un résultat positif.
+
+</details>
+
+---
+
+## 🗺️ 10 — Roadmap QA
+
+- [x] Structuration des tests API
+- [x] Création du client HTTP commun
+- [x] Centralisation des endpoints
+- [x] Configuration partagée
+- [x] Mise en place de Selenium
+- [x] Création de `BasePage`
+- [x] Création des premiers Page Objects
+- [x] Premiers tests web de navigation et du catalogue
+- [ ] Validation détaillée des noms et prix des produits
+- [ ] Tests des fiches produits
+- [ ] Tests des filtres web
+- [ ] Tests d'accès à l'administration
+- [ ] Parcours end-to-end complets
+- [ ] Tests mobiles Android et iOS avec Appium
+- [ ] Intégration continue et rapports consolidés
+
+---
+
+## 🔐 11 — Qualité et maintenance
+
+- Ne jamais committer `.env`, les mots de passe ou les jetons.
+- Exclure `.venv/`, `__pycache__/` et `.pytest_cache/` de Git.
+- Utiliser des attentes explicites dans Selenium.
+- Garder les scénarios indépendants et lisibles.
+- Séparer les anomalies de l'application des défauts du framework.
+- Mettre à jour la documentation lorsque la couverture évolue.
+
+---
+
+<div align="center">
+
+### 🚀 E2ETestYaas
+
+**Quality • Automation • Reliability**
+
+*Framework QA en cours de développement pour YASS Parfums.*
+
+</div>
