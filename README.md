@@ -1,57 +1,104 @@
-# 🧪 E2ETestYaas
-### QA Automation Framework — YASS Parfums
+# E2ETestYaas — QA Automation Framework
 
-![Python](https://img.shields.io/badge/Python-3.13-3776AB?logo=python&logoColor=white)
-![Pytest](https://img.shields.io/badge/Pytest-Testing-0A9EDC?logo=pytest&logoColor=white)
-![Selenium](https://img.shields.io/badge/Selenium-Web_Automation-43B02A?logo=selenium&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python&logoColor=white)
+![Pytest](https://img.shields.io/badge/Pytest-Test_Automation-green?logo=pytest&logoColor=white)
 ![Requests](https://img.shields.io/badge/Requests-API_Testing-orange)
-![Status](https://img.shields.io/badge/Status-In_Progress-yellow)
+![Selenium](https://img.shields.io/badge/Selenium-Web_Automation-brightgreen?logo=selenium&logoColor=white)
+![CI/CD](https://img.shields.io/badge/CI%2FCD-In_Progress-yellow)
 
-> **Un framework de tests automatisés pour contrôler la qualité des API et de l'interface web de YASS Parfums.**
+> **Construire un dispositif de validation fiable, maintenable et orienté risque pour sécuriser les évolutions de YASS Parfums.**
 
-🌐 **Application :** [yassparfums.com](https://yassparfums.com/)  
-🔐 **Administration :** [yassparfums.com/admin](https://yassparfums.com/admin)  
-🛠️ **IDE :** PyCharm
+## 1. Introduction & vision stratégique
 
----
+### Objectif
 
-## 📌 01 — Présentation du projet
+**E2ETestYaas** est un framework d'automatisation QA développé en Python pour valider les API REST et les parcours utilisateurs de l'application YASS Parfums.
 
-**E2ETestYaas** est un framework QA développé en Python pour automatiser les tests de l'application YASS Parfums.
+L'objectif dépasse la simple exécution de scripts de test : il s'agit de construire progressivement un dispositif de contrôle qualité qui fournit un feedback rapide, détecte les régressions et améliore la confiance dans les livraisons.
 
-Le projet suit une approche progressive : commencer par les tests API, mettre en place les tests web avec Selenium, puis étendre la couverture aux parcours end-to-end et aux applications mobiles.
+Application cible : [https://yassparfums.com/](https://yassparfums.com/)
 
-### 🎯 Objectifs
+Interface d'administration : [https://yassparfums.com/admin](https://yassparfums.com/admin)
 
-- ✅ Vérifier les réponses et la structure des API.
-- ✅ Tester les produits, catégories et filtres.
-- ✅ Contrôler les accès aux endpoints protégés.
-- ✅ Vérifier le chargement des pages et la navigation web.
-- 🔄 Automatiser les fiches produits et les parcours d'achat.
-- 📊 Produire des rapports de test HTML.
-- 📱 Préparer les tests mobiles avec Appium.
+### Principes directeurs
 
----
+- **Risk-based testing :** prioriser les contrôles selon l'impact métier, la probabilité de défaillance et la criticité des fonctionnalités.
+- **Fast feedback :** exécuter les tests les plus rapides et les plus déterministes en premier afin d'identifier rapidement les régressions.
+- **Testabilité et maintenabilité :** centraliser la configuration, les clients techniques, les fixtures et les composants réutilisables.
+- **Traçabilité :** relier les scénarios, les résultats d'exécution, les anomalies et les rapports aux fonctionnalités concernées.
+- **Détection précoce :** déplacer les contrôles pertinents vers les Pull Requests et les pipelines d'intégration continue.
+- **Amélioration continue :** mesurer la stabilité des tests, analyser les échecs et faire évoluer la couverture en fonction des risques observés.
 
-## 🧰 02 — Stack technique
+### Périmètre fonctionnel
 
-| Technologie | Rôle |
-|:--|:--|
-| 🐍 Python | Langage du framework |
-| 🧪 Pytest | Exécution des tests |
-| 🌐 Requests | Tests API HTTP |
-| 🖥️ Selenium WebDriver | Automatisation web |
-| 🌍 Chrome | Navigateur de test |
-| 📊 pytest-html | Rapports HTML |
-| 💻 PyCharm | Environnement de développement |
+Le framework cible progressivement les domaines suivants :
+
+1. Tests de contrats et de comportements des API REST.
+2. Contrôles d'accès et scénarios négatifs.
+3. Tests web et validation des parcours utilisateur.
+4. Vérification de la persistance des données en base SQL, lorsque l'accès est disponible.
+5. Tests end-to-end transverses couvrant plusieurs composants.
+6. Industrialisation de l'exécution et du reporting via CI/CD.
 
 ---
 
-## 🏗️ 03 — Architecture du projet
+## 2. État actuel vs trajectoire cible
+
+La distinction entre l'existant et la cible est essentielle : les fonctionnalités planifiées ne sont pas considérées comme implémentées tant qu'elles ne sont pas développées et vérifiées.
+
+| Domaine | État actuel | Trajectoire cible |
+|---|---|---|
+| Tests API REST | Python, Pytest et `requests` | Couverture structurée par risque métier et criticité |
+| Validation HTTP | Vérification des codes de statut et des réponses | Assertions métier et contrats de réponse plus complets |
+| Données de réponse | Vérifications de structures et champs utiles | Schémas de validation et jeux de données maîtrisés |
+| Gestion des appels | Client API commun et endpoints centralisés | Gestion homogène des erreurs, authentification et configuration par environnement |
+| Tests web | Premiers tests Selenium avec Pytest et Page Object Model | Parcours métier de bout en bout et couverture des cas critiques |
+| Données SQL | Contrôles SQL non encore intégrés au framework | Vérification de la persistance et de la cohérence des données, avec accès autorisé à la base |
+| CI/CD | Workflow GitHub Actions prévu ou en cours de mise en place | Exécution automatisée sur Pull Request, push et planification |
+| Reporting | Rapports HTML Pytest disponibles localement | Rapports centralisés, historiques d'exécution et suivi des tendances |
+| Observabilité | Analyse des résultats et anomalies identifiées | Diagnostics structurés, logs exploitables et classification des échecs |
+| IA / LLMs | Usage assisté envisageable | Assistance encadrée à la conception, à l'analyse et à la maintenance des tests |
+
+### État d'avancement connu
+
+**Tests API**
+- Client HTTP commun avec `requests`.
+- Centralisation des endpoints et de la configuration.
+- Tests couvrant notamment les produits, les catégories, les filtres, les paramètres et certains contrôles d'accès.
+- Exécution avec Pytest et génération de rapports HTML.
+
+**Tests web**
+- Selenium WebDriver intégré à Pytest.
+- Configuration commune de l'application et du navigateur.
+- Premiers Page Objects : `BasePage`, `HomePage` et `CataloguePage`.
+- Premiers scénarios validés pour le chargement de l'accueil, la navigation et la présence de la section produits.
+
+**Limites connues**
+- Une anomalie de filtrage par catégorie a été observée : l'API renvoie HTTP 500 pour une requête attendue en HTTP 200.
+- La couverture complète des fiches produits et des parcours end-to-end reste à développer.
+- Les contrôles SQL et l'intégration CI/CD doivent être considérés comme des objectifs tant que leur exécution effective n'est pas confirmée.
+
+---
+
+## 3. Architecture technique
+
+### Stack technologique
+
+| Technologie | Responsabilité |
+|---|---|
+| Python | Langage du framework |
+| Pytest | Organisation, fixtures et exécution des tests |
+| Requests | Appels HTTP et tests API |
+| Selenium WebDriver | Automatisation du navigateur |
+| pytest-html | Génération de rapports HTML |
+| Git / GitHub | Versionnement et collaboration |
+| GitHub Actions | Cible d'industrialisation CI/CD |
+| PyCharm | Environnement de développement |
+
+### Organisation du code
 
 ```text
 E2ETestYaas/
-│
 ├── api/
 │   ├── discovery/
 │   ├── tests/
@@ -69,10 +116,8 @@ E2ETestYaas/
 │   ├── client.py
 │   ├── config.py
 │   └── endpoints.py
-│
 ├── config/
 │   └── environments.py
-│
 ├── web/
 │   ├── pages/
 │   │   ├── base_page.py
@@ -82,9 +127,8 @@ E2ETestYaas/
 │       ├── test_home.py
 │       ├── test_navigation.py
 │       └── test_catalogue.py
-│
-├── mobile/
 ├── data/
+├── mobile/
 ├── reports/
 ├── conftest.py
 ├── pytest.ini
@@ -93,225 +137,295 @@ E2ETestYaas/
 └── .gitignore
 ```
 
-> **Architecture retenue :** séparation des tests API, des pages web, des scénarios de test et de la configuration commune.
+Cette arborescence décrit l'organisation de référence actuelle. Les fichiers présents peuvent évoluer avec l'implémentation.
+
+### Responsabilités architecturales
+
+- `api/client.py` : centraliser les requêtes HTTP et le cycle de vie de la session.
+- `api/endpoints.py` : regrouper les chemins des endpoints.
+- `api/config.py` : porter les paramètres propres aux appels API.
+- `config/environments.py` : centraliser les paramètres partagés de l'application.
+- `conftest.py` : fournir les fixtures communes Pytest, notamment les clients et le navigateur.
+- `api/tests/` : isoler les scénarios API.
+- `web/pages/` : encapsuler les sélecteurs et les actions Selenium avec le Page Object Model.
+- `web/tests/` : décrire les scénarios web et leurs assertions.
+- `data/` : accueillir les jeux de données réutilisables.
+- `reports/` : recevoir les rapports générés.
+
+### Fixtures Pytest et isolation
+
+Les fixtures Pytest permettent de contrôler la création, la portée et le nettoyage des ressources.
+
+Bonnes pratiques cibles :
+
+- Réutiliser un client API via une fixture adaptée à sa durée de vie.
+- Créer et fermer le navigateur proprement après chaque scénario web.
+- Éviter les dépendances implicites entre tests.
+- Ne pas faire dépendre l'ordre d'exécution de la réussite des tests précédents.
+- Garder les données de test séparées de la logique d'assertion.
+- Prévoir un nettoyage explicite pour les tests qui créent ou modifient des données.
+
+### Gestion des environnements et des données
+
+La configuration doit être externalisée : URL de base, délais d'attente et paramètres d'environnement ne doivent pas être dispersés dans les tests.
+
+La trajectoire cible prévoit :
+- des environnements de test clairement identifiés ;
+- des jeux de données déterministes et réutilisables ;
+- une séparation entre données de test, configuration et secrets ;
+- une stratégie de nettoyage lorsque des données persistantes sont créées ;
+- l'utilisation de variables d'environnement ou de mécanismes sécurisés pour les paramètres sensibles.
 
 ---
 
-## 🔌 04 — Stratégie de tests API
+## 4. CI/CD & industrialisation
 
 ### Objectif
 
-Valider les réponses HTTP, les données retournées, les paramètres de requête et les contrôles d'accès, sans accès direct au backend.
+Industrialiser l'exécution pour rendre le résultat des tests disponible au bon moment, notamment avant la fusion d'une Pull Request ou lors d'une campagne planifiée.
 
-### Couverture fonctionnelle
+### Pipeline cible
 
-| Domaine | Contrôles |
-|:--|:--|
-| Health check | Disponibilité de l'API |
-| Produits | Liste, données et pagination |
-| Détail produit | Produit existant et identifiant inexistant |
-| Catégories | Liste et détail |
-| Filtres | Recherche, prix et catégorie |
-| Paramètres | Structure de la réponse |
-| Administration | Accès sans authentification |
-| Exploration | Paramètres invalides et réponses d'erreur |
+```text
+Pull Request / Push / Exécution planifiée
+                    |
+                    v
+          Préparation de l'environnement
+                    |
+                    v
+          Installation des dépendances
+                    |
+                    v
+           Tests API rapides et critiques
+                    |
+                    v
+              Tests Web Selenium
+                    |
+                    v
+        Collecte des rapports et diagnostics
+                    |
+                    v
+        Décision selon les critères qualité
+```
 
-### Bonnes pratiques
+### Déclencheurs recommandés
 
-- Centraliser les requêtes dans `api/client.py`.
-- Centraliser les chemins dans `api/endpoints.py`.
-- Garder la configuration dans `api/config.py`.
-- Tester les cas nominaux et les cas négatifs.
-- Utiliser des assertions explicites.
-- Documenter les anomalies sans affaiblir les assertions pour faire artificiellement passer les tests.
+| Déclencheur | Objectif |
+|---|---|
+| Pull Request | Détecter les régressions avant fusion |
+| Push sur branche partagée | Vérifier la cohérence après intégration |
+| Exécution planifiée | Détecter les régressions indépendantes des changements récents |
+| Lancement manuel | Investiguer un incident ou exécuter une campagne ciblée |
+
+### Stratégie d'exécution
+
+**Niveau 1 — Feedback rapide**
+- Tests API critiques et déterministes.
+- Contrôles de disponibilité.
+- Vérification des contrats et des accès.
+
+**Niveau 2 — Validation fonctionnelle**
+- Tests API complets.
+- Tests web Selenium.
+- Scénarios de recherche, filtres et consultation des produits.
+
+**Niveau 3 — Campagnes approfondies**
+- Parcours end-to-end transverses.
+- Contrôles SQL de persistance, si un accès autorisé est disponible.
+- Tests plus longs, exécutés de préférence sur un environnement adapté.
+
+### Critères de qualité
+
+Les seuils doivent être définis à partir de la criticité métier et de la stabilité réelle des campagnes.
+
+Critères recommandés :
+- Aucun échec inexpliqué sur les scénarios critiques.
+- Aucun défaut bloquant ouvert sans décision explicite.
+- Rapports disponibles pour chaque campagne.
+- Tests indépendants et reproductibles.
+- Secrets absents des logs et des artefacts.
+- Échecs classifiés entre défaut applicatif, problème d'environnement et défaut du test.
+
+Une anomalie connue ne doit pas être masquée en affaiblissant une assertion. Elle doit être documentée, suivie et faire l'objet d'une décision explicite dans la politique de qualité.
+
+### Indicateurs de suivi
+
+| Indicateur | Utilité |
+|---|---|
+| Taux de réussite | Suivre la stabilité de la campagne |
+| Taux de tests instables (flaky) | Identifier les tests non déterministes |
+| Durée du pipeline | Mesurer le délai de feedback |
+| Couverture des risques critiques | Vérifier que les fonctions prioritaires sont testées |
+| Défauts détectés avant production | Mesurer l'efficacité préventive |
+| Répartition des échecs | Distinguer application, environnement et framework |
+| Ancienneté des anomalies | Suivre la dette qualité |
+
+La couverture de code, si elle est introduite, ne doit pas être considérée comme un substitut à la couverture des risques métier.
+
+### Déploiement continu : étape ultérieure
+
+Le framework cible d'abord la validation continue. Le déploiement automatique devra être envisagé après la mise en place d'un environnement de staging, de critères de promotion, d'une gestion sécurisée des secrets et d'une stratégie de retour arrière.
+
+Les tests contre la production doivent rester non destructifs et ne doivent jamais modifier des données réelles sans autorisation explicite.
 
 ---
 
-## 🖥️ 05 — Stratégie de tests Web Selenium
+## 5. Usage pragmatique de l'IA et des LLMs
 
-### Objectif
+### Positionnement
 
-Vérifier le comportement visible de l'application dans Chrome et automatiser progressivement les interactions essentielles des utilisateurs.
+Les assistants IA peuvent accélérer certaines activités QA, mais ne remplacent ni l'analyse du risque, ni la validation humaine, ni l'exécution réelle des tests.
 
-### 🧱 Design Pattern : Page Object Model (POM)
+### Cas d'usage pertinents
 
-Le framework utilise le **Page Object Model** pour séparer la logique des pages des scénarios de test.
+**Conception des tests**
+- Proposer des cas nominaux, limites et négatifs à partir d'une spécification.
+- Identifier les risques oubliés dans une stratégie de test.
+- Générer une première version de scénarios Pytest.
+- Suggérer des jeux de données et des assertions.
 
-| Fichier | Responsabilité |
-|:--|:--|
-| `config/environments.py` | URL, délai d'attente et dimensions du navigateur |
-| `conftest.py` | Création et fermeture du navigateur |
-| `web/pages/base_page.py` | Méthodes Selenium communes |
-| `web/pages/home_page.py` | Actions de la page d'accueil |
-| `web/pages/catalogue_page.py` | Navigation et accès au catalogue |
-| `web/tests/` | Scénarios et assertions |
+**Analyse des échecs**
+- Résumer des traces d'erreur et des logs.
+- Comparer une réponse attendue à une réponse observée.
+- Proposer des hypothèses à vérifier lors d'une investigation.
+- Aider à distinguer une anomalie applicative d'un problème potentiel de configuration.
 
-**Avantages :** moins de duplication, sélecteurs centralisés, tests plus lisibles et maintenance facilitée.
+**Maintenance**
+- Repérer les duplications dans les tests.
+- Proposer des refactorisations.
+- Améliorer la lisibilité des noms, messages d'erreur et rapports.
+- Aider à documenter les scénarios et les anomalies.
 
-### ✅ Scénarios web actuellement validés
+### Garde-fous obligatoires
 
-| ID | Scénario | Résultat communiqué |
-|:--|:--|:--:|
-| WEB-001 | Chargement de la page d'accueil | ✅ PASS |
-| WEB-002 | Navigation avec « Découvrir la boutique » | ✅ PASS |
-| WEB-003 | Affichage de la section « Nos produits » | ✅ PASS |
-| WEB-004 | Présence d'éléments dans la grille produits | ✅ PASS |
+1. **Confidentialité :** ne pas transmettre de mots de passe, jetons, données personnelles ou secrets de production à un assistant non autorisé.
+2. **Validation humaine :** tout code généré doit être relu, compris et exécuté avant intégration.
+3. **Vérification factuelle :** ne pas accepter un endpoint, un sélecteur ou un comportement inventé par le modèle sans preuve.
+4. **Traçabilité :** documenter les décisions importantes et conserver les résultats réels des tests.
+5. **Sécurité :** ne jamais autoriser une action destructive ou un déploiement sur la seule base d'une suggestion générée.
+6. **Qualité des assertions :** ne pas affaiblir les contrôles pour faire passer une campagne en vert.
+7. **Non-régression :** vérifier que les refactorisations proposées conservent le comportement attendu.
 
-*Les cartes produits, les prix et les fiches produits doivent encore faire l'objet de vérifications détaillées.*
+### Principe directeur
 
-### 🚀 Prochains scénarios
-
-1. Vérifier le nom et le prix de chaque produit affiché.
-2. Ouvrir une fiche produit et vérifier ses informations.
-3. Tester les filtres et la recherche depuis l'interface.
-4. Vérifier les restrictions d'accès à l'administration.
-5. Construire des parcours end-to-end complets.
-
----
-
-## ⚙️ 06 — Configuration centralisée
-
-Le fichier `config/environments.py` centralise les paramètres communs :
-
-- `BASE_URL` — adresse de l'application.
-- `DEFAULT_TIMEOUT` — délai d'attente Selenium.
-- `BROWSER_WINDOW_SIZE` — dimensions initiales de Chrome.
-
-L'adresse peut être remplacée par la variable d'environnement `YASS_BASE_URL`.
-
-La configuration API reste dans `api/config.py`, qui réutilise l'URL commune tout en conservant son délai d'attente spécifique.
-
-🔒 **Sécurité :** ne jamais publier les mots de passe, jetons ou valeurs confidentielles du fichier `.env`.
+> **L'IA accélère la production et l'analyse ; la responsabilité de la décision qualité reste humaine.**
 
 ---
 
-## 📦 07 — Installation
+## 6. Gestion des anomalies et traçabilité
 
-### Étape 1 — Créer l'environnement virtuel
+Une anomalie détectée doit être décrite de façon reproductible et exploitable.
 
-Sous Windows :
+Chaque défaut devrait contenir :
+- l'identifiant du scénario ;
+- l'environnement et le contexte d'exécution ;
+- les préconditions et données utilisées ;
+- la requête ou l'action exécutée ;
+- le résultat attendu et le résultat observé ;
+- les logs ou extraits de rapport utiles, expurgés de toute donnée sensible ;
+- l'impact métier, la sévérité et la priorité ;
+- le statut de l'investigation et la décision de résolution.
+
+### Anomalie connue
+
+Le test de filtrage des produits par catégorie a précédemment révélé une réponse HTTP 500 alors qu'une réponse HTTP 200 était attendue.
+
+Cette anomalie doit être réévaluée lors des campagnes suivantes. Son statut ne doit être déclaré résolu qu'après une vérification effective.
+
+---
+
+## 7. Installation et exécution locale
+
+### Pré-requis
+
+- Python compatible avec les dépendances du projet.
+- Git.
+- Chrome pour les tests web.
+- Dépendances listées dans `requirements.txt`.
+
+### Installation
 
 ```bash
 python -m venv .venv
 ```
 
-### Étape 2 — Activer l'environnement
+Sous Windows :
 
 ```bash
 .venv\Scripts\activate
 ```
 
-### Étape 3 — Installer les dépendances
+Installer les dépendances :
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-### Étape 4 — Vérifier l'environnement
-
-Vérifiez que Chrome est installé. Avec une version récente de Selenium, Selenium Manager peut gérer automatiquement le pilote du navigateur.
-
----
-
-## ▶️ 08 — Exécution des tests
-
-### Tous les tests
-
-```bash
-python -m pytest -v
-```
-
-### Tests API uniquement
+### Lancer les tests API
 
 ```bash
 python -m pytest -v api/tests
 ```
 
-### Tests Web uniquement
+### Lancer les tests Web
 
 ```bash
 python -m pytest -v web/tests
 ```
 
-### Test de la page d'accueil
+### Lancer l'ensemble des tests
 
 ```bash
-python -m pytest -v web/tests/test_home.py
+python -m pytest -v
 ```
 
 ### Générer un rapport HTML
 
 ```bash
-python -m pytest -v --html=reports/api-test-report.html --self-contained-html
+python -m pytest -v --html=reports/test-report.html --self-contained-html
 ```
 
-📁 Le rapport est enregistré dans `reports/`. Le nom `api-test-report.html` est historique ; un nom plus général pourra être utilisé lorsque les campagnes API et web seront consolidées.
+Le rapport est généré localement dans `reports/`. La génération du rapport ne garantit pas que tous les tests passent : le statut de sortie de Pytest reste la référence pour déterminer le résultat de la campagne.
 
 ---
 
-## 🐛 09 — Anomalie API connue
+## 8. Roadmap d'industrialisation
 
-<details>
-<summary><strong>API — Filtrage des produits par catégorie (HTTP 500)</strong></summary>
-
-**Test concerné :** `test_filter_products_by_category`
-
-**Requête :** `GET /api/products?categorie=7`
-
-| Élément | Résultat |
-|:--|:--|
-| Résultat attendu | HTTP 200 |
-| Résultat observé | HTTP 500 |
-| Statut | 🔎 À investiguer |
-
-Lors de la dernière campagne API communiquée :
-
-- **16 tests réussis**
-- **1 test échoué**
-
-L'anomalie reste documentée. L'assertion ne doit pas être modifiée uniquement pour obtenir un résultat positif.
-
-</details>
+- [x] Structuration initiale des tests API.
+- [x] Client HTTP commun et centralisation des endpoints.
+- [x] Configuration commune de l'application.
+- [x] Premiers tests web avec Selenium et Pytest.
+- [x] Introduction du Page Object Model.
+- [ ] Consolidation des conventions et des jeux de données de test.
+- [ ] Stabilisation des scénarios API critiques.
+- [ ] Couverture détaillée des fiches produits et des parcours web.
+- [ ] Mise en place et validation du pipeline GitHub Actions.
+- [ ] Conservation et consultation centralisée des rapports.
+- [ ] Contrôles SQL de persistance, si l'accès est autorisé.
+- [ ] Scénarios end-to-end transverses.
+- [ ] Suivi des indicateurs qualité.
+- [ ] Extension mobile avec Appium.
+- [ ] Évaluation encadrée des cas d'usage IA/LLM.
 
 ---
 
-## 🗺️ 10 — Roadmap QA
+## 9. Sécurité et maintenance du dépôt
 
-- [x] Structuration des tests API
-- [x] Création du client HTTP commun
-- [x] Centralisation des endpoints
-- [x] Configuration partagée
-- [x] Mise en place de Selenium
-- [x] Création de `BasePage`
-- [x] Création des premiers Page Objects
-- [x] Premiers tests web de navigation et du catalogue
-- [ ] Validation détaillée des noms et prix des produits
-- [ ] Tests des fiches produits
-- [ ] Tests des filtres web
-- [ ] Tests d'accès à l'administration
-- [ ] Parcours end-to-end complets
-- [ ] Tests mobiles Android et iOS avec Appium
-- [ ] Intégration continue et rapports consolidés
-
----
-
-## 🔐 11 — Qualité et maintenance
-
-- Ne jamais committer `.env`, les mots de passe ou les jetons.
+- Ne jamais versionner `.env`, les jetons ou les mots de passe.
 - Exclure `.venv/`, `__pycache__/` et `.pytest_cache/` de Git.
-- Utiliser des attentes explicites dans Selenium.
-- Garder les scénarios indépendants et lisibles.
-- Séparer les anomalies de l'application des défauts du framework.
-- Mettre à jour la documentation lorsque la couverture évolue.
+- Définir une politique claire pour les rapports générés.
+- Ne pas stocker de données personnelles ou réelles dans les jeux de données de test.
+- Utiliser des environnements adaptés aux tests qui modifient des données.
+- Revoir périodiquement les dépendances et versions des actions CI utilisées.
 
 ---
 
-<div align="center">
+## Conclusion
 
-### 🚀 E2ETestYaas
+**E2ETestYaas évolue d'une suite de tests API vers un dispositif de validation QA industrialisé.**
 
-**Quality • Automation • Reliability**
+La priorité est de garantir des contrôles fiables, traçables et orientés risque, puis de les intégrer progressivement aux workflows de développement. L'objectif final n'est pas seulement d'augmenter le nombre de tests, mais d'améliorer la rapidité du feedback, la détection précoce des défauts et la confiance dans chaque livraison.
 
-*Framework QA en cours de développement pour YASS Parfums.*
-
-</div>
+*Projet : E2ETestYaas — QA Automation Framework*  
+*Application cible : YASS Parfums*  
+*Statut : développement et industrialisation progressifs*
